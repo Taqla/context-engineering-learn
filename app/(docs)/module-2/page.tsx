@@ -1,10 +1,6 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-
-const Module2Content = dynamic(() => import('@/app/(docs)/module-2/content.mdx'), {
-  ssr: false,
-});
+import Module2Content from './content.mdx';
 
 export default function Module2Page() {
   return (
