@@ -1,0 +1,443 @@
+import QuizEmbed from '@/components/QuizEmbed';
+import ProgressTracker from '@/components/ProgressTracker';
+
+# Module 1: Prompt Fundamentals
+
+<ProgressTracker moduleId="module-1" />
+
+> "If you wish to make an apple pie from scratch, you must first invent the universe." — Carl Sagan
+
+**Module Duration:** 30 minutes  
+**Source Material:** Adapted from [davidkimai/Context-Engineering](https://github.com/davidkimai/Context-Engineering)
+
+---
+
+## Introduction: The Atom - A Single Instruction
+
+In our journey through context engineering, we begin with the most fundamental unit: the **atom** — a single, standalone instruction to an LLM.
+
+```
+┌───────────────────────────────────────────────┐
+│                                               │
+│  "Write a poem about the ocean in 4 lines."   │
+│                                               │
+└───────────────────────────────────────────────┘
+```
+
+This is prompt engineering in its purest form: one human, one instruction, one model response. Simple, direct, atomic.
+
+<QuizEmbed 
+  moduleId="module-1" 
+  section="intro"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'What is an "atomic prompt" in the context of LLM interactions?',
+      options: {
+        A: 'A prompt that uses scientific terminology',
+        B: 'A single, standalone instruction to an LLM',
+        C: 'A prompt that includes multiple examples',
+        D: 'A prompt with complex reasoning steps'
+      },
+      correct: 'B',
+      hint: 'Think about the fundamental unit - the simplest form of an LLM instruction.',
+      explanation: 'An atomic prompt is the most basic unit of LLM interaction: a single, standalone instruction without examples or additional context. Like an atom in chemistry, it\'s the fundamental building block.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'According to the anatomy of an atomic prompt, which components are essential?',
+      options: {
+        A: 'Task only',
+        B: 'Task + Examples + Memory',
+        C: 'Task + Constraints + Output Format',
+        D: 'Instructions + Context + History'
+      },
+      correct: 'C',
+      hint: 'Remember the formula shown in the lesson: what three parts make up an atomic prompt?',
+      explanation: 'An effective atomic prompt consists of three parts: [TASK] + [CONSTRAINTS] + [OUTPUT FORMAT]. For example: "Write a poem" (task) "about the ocean using 5-letter words" (constraints) "in 4 lines" (format).'
+    },
+    {
+      difficulty: 'hard',
+      question: 'Why do atomic prompts exhibit high variance in outputs when repeated?',
+      options: {
+        A: 'LLMs are fundamentally random and unpredictable',
+        B: 'Atomic prompts lack sufficient context and examples to constrain model behavior',
+        C: 'The models forget previous instructions',
+        D: 'Atomic prompts consume too many tokens'
+      },
+      correct: 'B',
+      hint: 'Consider what atomic prompts are missing compared to more advanced prompt structures.',
+      explanation: 'Atomic prompts show high variance because they provide minimal context and no examples to guide the model. Without demonstrations or detailed constraints, models have more freedom to interpret the instruction differently each time, leading to inconsistent outputs.'
+    }
+  ]}
+/>
+
+---
+
+## The Anatomy of an Atomic Prompt
+
+Let's break down what makes an effective atomic prompt:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│  ATOMIC PROMPT = [TASK] + [CONSTRAINTS] + [OUTPUT FORMAT]   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Example Breakdown:
+
+| **TASK** | **CONSTRAINTS** | **OUTPUT FORMAT** |
+|----------|-----------------|-------------------|
+| "Write a poem about space." | "using only words with 5 letters or less." | "in 4 lines." |
+
+---
+
+## Why Prompts Alone Fail
+
+While atomic prompts are the building blocks of LLM interactions, they quickly reveal fundamental limitations:
+
+### Limitations of Atomic Prompts:
+- ✗ **No memory** across interactions
+- ✗ **Limited demonstration** capability
+- ✗ **No complex reasoning** scaffolds
+- ✗ **Prone to ambiguity**
+- ✗ **High variance** in outputs
+
+### Empirical Evidence:
+
+```python
+# A basic atomic prompt
+atomic_prompt = "List 5 symptoms of diabetes."
+
+# Send to LLM multiple times
+responses = [llm.generate(atomic_prompt) for _ in range(5)]
+
+# Measure variability
+unique_symptoms = set()
+for response in responses:
+    symptoms = extract_symptoms(response)
+    unique_symptoms.update(symptoms)
+
+print(f"Found {len(unique_symptoms)} unique symptoms across 5 identical prompts")
+# Typically outputs far more than just 5 unique symptoms
+```
+
+**The problem?** Models struggle with consistency when given minimal context.
+
+<QuizEmbed 
+  moduleId="module-1" 
+  section="failures"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'Which of the following is NOT a limitation of atomic prompts?',
+      options: {
+        A: 'No memory across interactions',
+        B: 'High variance in outputs',
+        C: 'Too many tokens consumed',
+        D: 'Prone to ambiguity'
+      },
+      correct: 'C',
+      hint: 'Atomic prompts are actually quite efficient with tokens - what is the real issue?',
+      explanation: 'Atomic prompts actually consume minimal tokens (which is one of their few advantages). The real limitations are lack of memory, high output variance, limited demonstration capability, and susceptibility to ambiguous interpretations.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'In the diabetes symptoms experiment, why does the model produce more than 5 unique symptoms across repeated prompts?',
+      options: {
+        A: 'The model is broken',
+        B: 'The prompt explicitly asks for different answers each time',
+        C: 'Lack of context and examples leads to inconsistent interpretations',
+        D: 'The model learns from previous prompts'
+      },
+      correct: 'C',
+      hint: 'Think about what makes the model choose different symptoms each time.',
+      explanation: 'Without examples or additional context, the atomic prompt gives the model too much freedom in interpretation. Each time it runs, it can select different symptoms from its training knowledge, leading to inconsistency. This demonstrates the high variance problem of atomic prompts.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'How would you modify an atomic prompt to reduce output variance while staying "atomic"?',
+      options: {
+        A: 'Add conversation history from previous interactions',
+        B: 'Include 2-3 example outputs (few-shot learning)',
+        C: 'Make constraints more specific and output format more rigid',
+        D: 'Use a system message with personality traits'
+      },
+      correct: 'C',
+      hint: 'Remember, we want to stay "atomic" - which means no examples or memory. What CAN we modify?',
+      explanation: 'Within the atomic prompt paradigm, the only way to reduce variance is to make the task constraints more specific and the output format more rigid. Options A and B would move us to "molecular" prompts (adding memory/examples), and D adds system-level context. More specific constraints like "List the 5 MOST COMMON symptoms in order of frequency" provide clearer guidance.'
+    }
+  ]}
+/>
+
+---
+
+## Token Budget and Optimization
+
+Even with atomic prompts, LLMs leverage massive implicit context from their training:
+
+### Implicit Context in Models:
+- ✓ Language rules and grammar
+- ✓ Common knowledge facts
+- ✓ Format conventions (lists, paragraphs, etc.)
+- ✓ Domain-specific knowledge (varies by model)
+- ✓ Learned interaction patterns
+
+This implicit knowledge gives us a foundation, but it's **unreliable** and varies between models and versions.
+
+### The Power Law: Token-Quality Curve
+
+For many tasks, we observe a power law relationship between context tokens and output quality:
+
+```
+Quality
+      ▲
+      │                        •
+      │                    •       •
+      │                •               •
+      │            •                       •
+      │        •                               •
+      │    •
+      │•
+      └───────────────────────────────────────────► Tokens
+          [Poor Start]  [Maximum ROI]  [Diminishing Returns]
+```
+
+**Critical insight:** There's a "maximum ROI zone" where adding just a few tokens yields dramatic quality improvements, but also "diminishing returns" where adding more tokens actually degrades performance.
+
+### Context Rot
+
+As context windows grow, we encounter **context rot** - the phenomenon where adding more information actually decreases model performance. This happens because:
+- Models struggle to maintain attention across very long contexts
+- Irrelevant information dilutes important details
+- Token limits force compression that loses nuance
+
+[Read more on Context Rot](https://research.trychroma.com/context-rot)
+
+<QuizEmbed 
+  moduleId="module-1" 
+  section="token-budget"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'What is "implicit context" in LLMs?',
+      options: {
+        A: 'Hidden instructions added by the model developers',
+        B: 'Knowledge and patterns learned during training',
+        C: 'Context from previous conversations',
+        D: 'System prompts that are invisible to users'
+      },
+      correct: 'B',
+      hint: 'Think about what the model already "knows" before you send any prompt.',
+      explanation: 'Implicit context refers to the vast knowledge and patterns that LLMs learned during training on massive datasets. This includes language rules, common knowledge, format conventions, and domain-specific information. It\'s "implicit" because you don\'t need to explicitly provide it in your prompt.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'According to the token-quality power law curve, when should you stop adding more context?',
+      options: {
+        A: 'Never - more context is always better',
+        B: 'When you hit the model\'s maximum token limit',
+        C: 'When you enter the diminishing returns zone where quality plateaus or declines',
+        D: 'After exactly 500 tokens'
+      },
+      correct: 'C',
+      hint: 'Look at the curve - what happens after the "Maximum ROI" zone?',
+      explanation: 'The power law curve shows that quality improvements taper off and can even decline after a certain point (diminishing returns zone). Adding more context beyond this point wastes tokens and may actually hurt performance. The optimal stopping point is in the "Maximum ROI zone" where you get the best quality per token invested.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'What is "context rot" and why does it occur?',
+      options: {
+        A: 'When old conversation history becomes outdated and irrelevant',
+        B: 'The degradation of model performance as context length increases beyond optimal',
+        C: 'When tokens expire after too many uses',
+        D: 'The natural decay of model weights over time'
+      },
+      correct: 'B',
+      hint: 'Think about what happens at the far right of the token-quality curve.',
+      explanation: 'Context rot is the phenomenon where adding more information to the context actually decreases model performance. This occurs because: (1) models struggle to maintain attention across very long contexts, (2) irrelevant information dilutes important details, and (3) token limits force compression that loses nuance. It\'s why "more context" isn\'t always better.'
+    }
+  ]}
+/>
+
+---
+
+## Optimization Strategies
+
+### Measuring Atom Efficiency
+
+Before moving on, try this exercise:
+
+1. Take a basic task you'd give to an LLM
+2. Create three different atomic prompt versions
+3. Measure tokens used and subjective quality
+4. Plot the efficiency frontier
+
+| **Version** | **Prompt** | **Tokens** | **Quality** |
+|-------------|------------|------------|-------------|
+| A | "Summarize this article." | 4 | 2/10 |
+| B | "Provide a concise summary of this article in 3 sentences." | 14 | 6/10 |
+| C | "Write a summary of the key points in this article, highlighting the main people and events." | 27 | 8/10 |
+
+### Prompt Templates to Try:
+
+```
+# Basic instruction
+{task}
+
+# Persona-based
+As a {persona}, {task}
+
+# Format-specific
+{task}
+Format: {format_specification}
+
+# Constraint-based
+{task}
+Constraints:
+- {constraint_1}
+- {constraint_2}
+- {constraint_3}
+
+# Step-by-step guided
+{task}
+Please follow these steps:
+1. {step_1}
+2. {step_2}
+3. {step_3}
+```
+
+<QuizEmbed 
+  moduleId="module-1" 
+  section="optimization"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'In the article summarization example, which version achieved the best quality score?',
+      options: {
+        A: 'Version A (4 tokens, quality 2/10)',
+        B: 'Version B (14 tokens, quality 6/10)',
+        C: 'Version C (27 tokens, quality 8/10)',
+        D: 'All versions had equal quality'
+      },
+      correct: 'C',
+      hint: 'Look at the quality column in the efficiency table.',
+      explanation: 'Version C achieved 8/10 quality by being more specific about what to include ("key points", "main people and events"). While it used more tokens (27), it provided clearer guidance to the model, resulting in better output quality.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'What is the most efficient version in the summarization example (best quality-to-token ratio)?',
+      options: {
+        A: 'Version A (4 tokens, quality 2/10) = 0.5 quality per token',
+        B: 'Version B (14 tokens, quality 6/10) = 0.43 quality per token',
+        C: 'Version C (27 tokens, quality 8/10) = 0.30 quality per token',
+        D: 'They all have the same efficiency'
+      },
+      correct: 'A',
+      hint: 'Calculate quality divided by tokens for each version. The highest ratio wins.',
+      explanation: 'Version A has the best token efficiency (2/4 = 0.5), followed by B (6/14 = 0.43), then C (8/27 = 0.30). However, this doesn\'t mean A is the best choice! Absolute quality matters too. Version B offers the best balance of decent quality (6/10) with reasonable efficiency (0.43), making it the practical winner in most cases.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'When would you choose the "constraint-based" template over the "basic instruction" template?',
+      options: {
+        A: 'When you have unlimited tokens available',
+        B: 'When the task output needs to meet specific requirements or limitations',
+        C: 'When you want faster model responses',
+        D: 'When the model is having trouble understanding basic instructions'
+      },
+      correct: 'B',
+      hint: 'Think about what constraints do - they define boundaries and requirements.',
+      explanation: 'Constraint-based templates are ideal when your task output needs to meet specific requirements or limitations. For example, if you need a summary "under 100 words", "avoiding technical jargon", or "suitable for a 10-year-old", constraints make these requirements explicit. This reduces ambiguity and guides the model toward outputs that meet your exact specifications, even though it uses more tokens.'
+    }
+  ]}
+/>
+
+---
+
+## From Atoms to Molecules
+
+The limitations of atoms lead us naturally to our next step: **molecules**, or multi-part prompts that combine instructions with examples, additional context, and structured formats.
+
+```
+┌──────────────────────────┐         ┌──────────────────────────┐
+│                          │         │ "Here's an example:      │
+│ "Write a limerick about  │    →    │  There once was a...     │
+│  a programmer."          │         │                          │
+│                          │         │  Now write a limerick    │
+└──────────────────────────┘         │  about a programmer."    │
+                                     └──────────────────────────┘
+    [Atomic Prompt]                       [Molecular Prompt]
+```
+
+By adding examples and structure, we begin to shape the context window deliberately—the first step toward context engineering.
+
+---
+
+## Key Takeaways
+
+1. **Atomic prompts** are the fundamental unit of LLM interaction
+2. They follow a basic structure: `task + constraints + output format`
+3. They have inherent limitations: no memory, examples, or reasoning scaffolds
+4. Even simple atomic prompts leverage the model's implicit knowledge
+5. There's a **power law relationship** between context tokens and quality
+6. **Context rot** can degrade performance when too much information is added
+7. Moving beyond atoms is the first step toward context engineering
+
+<QuizEmbed 
+  moduleId="module-1" 
+  section="final-assessment"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'What is the next step after mastering atomic prompts?',
+      options: {
+        A: 'Using longer atomic prompts',
+        B: 'Moving to molecular prompts with examples',
+        C: 'Building multi-agent systems',
+        D: 'Implementing neural field theory'
+      },
+      correct: 'B',
+      hint: 'The lesson mentions the natural progression from atoms to what?',
+      explanation: 'After understanding atomic prompts, the next step is molecular prompts - adding examples and structure to guide the model more effectively. This is the foundation of few-shot learning and more advanced context engineering techniques.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'A developer wants to create consistent outputs for customer support responses. Which approach best addresses the "high variance" limitation of atomic prompts?',
+      options: {
+        A: 'Run the same atomic prompt 10 times and pick the best response',
+        B: 'Create a molecular prompt with 2-3 example responses showing desired format',
+        C: 'Use a longer atomic prompt with more constraints',
+        D: 'Switch to a different LLM model'
+      },
+      correct: 'B',
+      hint: 'What gives models consistent guidance about what outputs should look like?',
+      explanation: 'Few-shot examples (molecular prompts) are the most effective way to reduce variance. By showing the model 2-3 concrete examples of desired responses, you give it clear patterns to follow. Option C helps somewhat but doesn\'t provide the concrete demonstrations that examples offer. Option A wastes resources, and Option D doesn\'t address the root cause.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'You\'re optimizing a prompt that currently uses 150 tokens with mediocre results. The token-quality curve suggests you\'re in the "poor start" zone. What should you do?',
+      options: {
+        A: 'Remove tokens to make it more atomic and efficient',
+        B: 'Add more tokens to reach the "Maximum ROI" zone',
+        C: 'Keep adding tokens until you hit the model limit',
+        D: 'Restructure the prompt to be more constraint-focused without changing token count'
+      },
+      correct: 'B',
+      hint: 'The curve shows quality improves dramatically when moving from "poor start" toward the sweet spot.',
+      explanation: 'When you\'re in the "poor start" zone with mediocre results, you likely haven\'t provided enough context yet. Adding tokens strategically (examples, clearer constraints, structured format) will move you into the "Maximum ROI" zone where quality jumps significantly. Option A would make things worse, C would overshoot into diminishing returns, and D might help but won\'t achieve the dramatic improvement that additional context provides.'
+    }
+  ]}
+/>
+
+---
+
+## Next Steps
+
+In **Module 2: Context Expansion**, we'll explore how to combine atoms into molecules using few-shot learning patterns and memory management techniques that dramatically improve reliability and control.
+
+---
+
+**Attribution:** This module is adapted from educational materials in the [davidkimai/Context-Engineering](https://github.com/davidkimai/Context-Engineering) repository. Original content by David Shapiro and contributors.
