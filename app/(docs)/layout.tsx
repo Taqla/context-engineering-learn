@@ -1,3 +1,5 @@
+'use client';
+
 import { Layout } from 'antd';
 import DocsSidebar from '@/components/DocsSidebar';
 

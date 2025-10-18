@@ -1,3 +1,5 @@
+'use client';
+
 import { Typography, Space, Card } from 'antd';
 import ProgressTracker from '@/components/ProgressTracker';
 

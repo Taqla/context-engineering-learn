@@ -1,26 +1,17 @@
-import withMDX from '@next/mdx';
-import withPWA from '@ducanh2912/next-pwa';
+import createMDX from '@next/mdx';
 
-const mdxConfig = withMDX({
-  extension: /\.mdx?$/,
+const withMDX = createMDX({
   options: {
     remarkPlugins: [],
     rehypePlugins: [],
   },
 });
 
-const pwaConfig = withPWA({
-  dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
-  register: true,
-  skipWaiting: true,
-  cacheOnFrontEndNav: true,
-  reloadOnOnline: true,
-});
-
-export default pwaConfig(mdxConfig({
-  output: 'export',
-  pageExtensions: ['ts', 'tsx', 'mdx'],
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   images: { unoptimized: true },
   trailingSlash: true,
-}));
+};
+
+export default withMDX(nextConfig);

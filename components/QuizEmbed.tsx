@@ -52,7 +52,7 @@ export default function QuizEmbed({ moduleId, section, quizzes }: QuizEmbedProps
 
   async function handleSubmit() {
     const selectedAnswer = answers[activeDifficulty];
-    if (!selectedAnswer) return;
+    if (!selectedAnswer || !currentQuiz) return;
 
     const correct = selectedAnswer === currentQuiz.correct;
     await saveQuizAnswer(moduleId, section, activeDifficulty, selectedAnswer, correct);
