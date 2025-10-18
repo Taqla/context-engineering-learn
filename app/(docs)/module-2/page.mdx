@@ -1,0 +1,432 @@
+import QuizEmbed from '@/components/QuizEmbed';
+import ProgressTracker from '@/components/ProgressTracker';
+
+# Module 2: Context Expansion
+
+<ProgressTracker moduleId="module-2" />
+
+> "The whole is greater than the sum of its parts." — Aristotle
+
+**Module Duration:** 45 minutes  
+**Source Material:** Adapted from [davidkimai/Context-Engineering](https://github.com/davidkimai/Context-Engineering)
+
+---
+
+## Part 1: Molecules - Few-Shot Learning
+
+### From Atoms to Molecules
+
+In Module 1, we explored **atomic prompts** — single instructions. Now we'll combine these atoms into **molecules**: structured contexts that include examples and patterns for the model to follow.
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                             │
+│  MOLECULE = [INSTRUCTION] + [EXAMPLES] + [CONTEXT] + [NEW INPUT]            │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+This molecular approach leverages a powerful capability of LLMs: **few-shot learning**.
+
+### Few-Shot Learning: Teaching by Example
+
+Few-shot learning is when we provide examples of the desired input-output pattern, allowing the model to recognize and continue the pattern.
+
+**Example:**
+```
+Input: "Paris"
+Output: "Paris is the capital of France."
+
+Input: "Tokyo"
+Output: "Tokyo is the capital of Japan."
+
+Input: "Ottawa"
+Output: ?
+```
+
+The model recognizes the pattern and completes it: "Ottawa is the capital of Canada."
+
+<QuizEmbed 
+  moduleId="module-2" 
+  section="few-shot"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'What is a "molecular prompt"?',
+      options: {
+        A: 'A prompt about chemistry',
+        B: 'A prompt that combines instructions with examples and context',
+        C: 'A prompt using scientific terminology',
+        D: 'A prompt longer than 1000 tokens'
+      },
+      correct: 'B',
+      hint: 'Think about how molecules are made from combining atoms.',
+      explanation: 'A molecular prompt combines the basic instruction (atom) with examples, additional context, and patterns. Like molecules in chemistry are made from atoms, molecular prompts are built by combining atomic prompts with demonstrations and structure.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'According to the lesson, molecular prompts typically achieve what improvement over atomic prompts?',
+      options: {
+        A: '5% accuracy improvement',
+        B: '10-30% accuracy improvement',
+        C: '50% accuracy improvement',
+        D: 'No measurable improvement'
+      },
+      correct: 'B',
+      hint: 'The lesson mentions a specific range of improvement.',
+      explanation: 'Molecular approaches typically achieve 10-30% improvement in accuracy on many tasks, plus better consistency, format adherence, and edge case handling. The exact improvement varies by task complexity.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'Why do we see diminishing returns when adding more examples to few-shot prompts?',
+      options: {
+        A: 'Models can only remember a fixed number of examples',
+        B: 'Each additional example costs tokens but yields less marginal improvement',
+        C: 'More examples confuse the model',
+        D: 'Examples become outdated quickly'
+      },
+      correct: 'B',
+      hint: 'Think about the accuracy vs tokens graph shown in the lesson.',
+      explanation: 'Each additional example consumes tokens but provides less marginal improvement than the previous one. The first example might boost accuracy by 15%, the second by 10%, the third by 5%, etc. This creates a curve of diminishing returns where token efficiency decreases with each additional example.'
+    }
+  ]}
+/>
+
+### Molecular Template Patterns
+
+Three common patterns for structuring molecular prompts:
+
+**1. Prefix-Suffix Pattern:**
+```
+<instruction>
+<example1> → <result1>
+<example2> → <result2>
+<new_input> → 
+```
+- Simplest approach
+- Works well for straightforward tasks
+- Minimal overhead
+
+**2. Input-Output Pairs:**
+```
+<instruction>
+
+Input: <example1>
+Output: <result1>
+
+Input: <example2>
+Output: <result2>
+
+Input: <new_input>
+Output:
+```
+- Clear demarcation
+- Good for structured data
+- Easy to parse
+
+**3. Chain-of-Thought:**
+```
+<instruction>
+
+Input: <example1>
+Thinking: <reasoning_step1>
+          <reasoning_step2>
+Output: <result1>
+
+Input: <new_input>
+Thinking:
+```
+- Exposes reasoning steps
+- Best for complex tasks
+- Improves accuracy on multi-step problems
+
+<QuizEmbed 
+  moduleId="module-2" 
+  section="templates"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'Which molecular template is simplest and has minimal overhead?',
+      options: {
+        A: 'Chain-of-Thought',
+        B: 'Input-Output Pairs',
+        C: 'Prefix-Suffix',
+        D: 'All are equally simple'
+      },
+      correct: 'C',
+      hint: 'Look at which pattern has the most compact structure.',
+      explanation: 'Prefix-Suffix is the simplest pattern with minimal overhead. It just shows input → output without extra labels or reasoning steps, making it token-efficient for straightforward tasks.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'When should you use Chain-of-Thought prompting instead of simple Input-Output pairs?',
+      options: {
+        A: 'When you have unlimited tokens',
+        B: 'When the task requires multi-step reasoning or complex problem-solving',
+        C: 'When you want faster responses',
+        D: 'When examples are hard to find'
+      },
+      correct: 'B',
+      hint: 'Think about what makes Chain-of-Thought different - it shows the reasoning process.',
+      explanation: 'Chain-of-Thought is best for complex tasks requiring multi-step reasoning. By exposing the thinking process, it guides the model through complex problem-solving steps. For simple classification or pattern matching, Input-Output pairs are more efficient.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'You need to classify customer reviews as positive/negative/neutral. You have 200 tokens available. What\'s the optimal approach?',
+      options: {
+        A: 'Use 10 examples with Prefix-Suffix to cover all cases',
+        B: 'Use 1-2 examples per class (3-6 total) with Input-Output format',
+        C: 'Use Chain-of-Thought with detailed reasoning for each example',
+        D: 'Use atomic prompts to save tokens'
+      },
+      correct: 'B',
+      hint: 'Consider the heuristic: classification tasks need 1-3 examples per class.',
+      explanation: 'For classification with 3 classes, you need 1-2 examples per class (3-6 total examples). Input-Output format provides clear demarcation while staying token-efficient. Option A wastes tokens with redundant examples. Option C uses too many tokens for a simple task. Option D sacrifices the accuracy gains from few-shot learning.'
+    }
+  ]}
+/>
+
+---
+
+## Part 2: Memory and State Management
+
+### The Memory Problem
+
+By default, LLMs have no memory. Each request is processed independently:
+
+```
+Request 1: "My name is Alex."
+Response 1: "Hello Alex, nice to meet you."
+
+Request 2: "What's my name?"
+Response 2: "I don't have access to previous conversations..."
+```
+
+Without memory, interactions feel disjointed and frustrating.
+
+### The Cell Solution: Conversation Memory
+
+Like biological cells that maintain internal state, we can create "cells" - context structures with memory:
+
+```
+┌───────────────────────────────────────────────────────────────────────┐
+│                                                                       │
+│  SYSTEM PROMPT: "You are a helpful assistant..."                      │
+│                                                                       │
+│  CONVERSATION HISTORY:                                                │
+│  User: "My name is Alex."                                             │
+│  Assistant: "Hello Alex, nice to meet you."                           │
+│                                                                       │
+│  CURRENT INPUT: "What's my name?"                                     │
+│                                                                       │
+└───────────────────────────────────────────────────────────────────────┘
+```
+
+Now the LLM can access previous exchanges and maintain continuity.
+
+<QuizEmbed 
+  moduleId="module-2" 
+  section="memory"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'Why do LLMs forget information from previous interactions by default?',
+      options: {
+        A: 'They have poor memory algorithms',
+        B: 'Each request is processed independently without conversation history',
+        C: 'Memory features are disabled by default',
+        D: 'LLMs can only remember for 5 minutes'
+      },
+      correct: 'B',
+      hint: 'Think about how atomic prompts work - each one is independent.',
+      explanation: 'LLMs don\'t have built-in memory between requests. Each API call is stateless and processed independently. To maintain continuity, we must explicitly include conversation history in each new request.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'What is a "cell" in context engineering?',
+      options: {
+        A: 'A biological unit used to train LLMs',
+        B: 'A context structure that includes memory/state across multiple interactions',
+        C: 'A type of neural network architecture',
+        D: 'A small atomic prompt'
+      },
+      correct: 'B',
+      hint: 'The lesson compares this to biological cells that maintain internal state.',
+      explanation: 'A "cell" is a context structure that preserves information across multiple exchanges with the LLM, analogous to how biological cells maintain their internal state while interacting with their environment. It combines instructions, examples, memory/state, and current input.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'As a conversation grows to 50 turns, the context window fills up. What problem does this create?',
+      options: {
+        A: 'The model becomes slower',
+        B: 'You must implement memory management strategies to fit within token limits',
+        C: 'The model forgets earlier conversations automatically',
+        D: 'API costs decrease'
+      },
+      correct: 'B',
+      hint: 'Think about what happens when you run out of tokens.',
+      explanation: 'As conversation history grows, it consumes more tokens, eventually exceeding the model\'s context window limit. You must implement memory management strategies like: truncating old messages, summarizing history, or keeping only recent/relevant exchanges. This is the core challenge of maintaining long conversations with LLMs.'
+    }
+  ]}
+/>
+
+### Memory Management Strategies
+
+As conversations grow, context windows fill up. Here are strategies to manage memory:
+
+**1. Sliding Window:**
+- Keep only the N most recent exchanges
+- Simple but loses older context
+- Good for: Short-term interactions
+
+**2. Summarization:**
+- Periodically summarize old conversation history
+- Compress many turns into brief summary
+- Good for: Long conversations where context accumulates
+
+**3. Selective Retention:**
+- Keep important messages, discard routine ones
+- Requires heuristics or classification
+- Good for: Task-focused conversations
+
+**4. Hierarchical Memory:**
+- Recent details + older summaries
+- Multi-level compression
+- Good for: Complex, long-running interactions
+
+<QuizEmbed 
+  moduleId="module-2" 
+  section="strategies"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'Which memory strategy is simplest but loses older context?',
+      options: {
+        A: 'Hierarchical Memory',
+        B: 'Selective Retention',
+        C: 'Sliding Window',
+        D: 'Summarization'
+      },
+      correct: 'C',
+      hint: 'Which strategy just keeps the N most recent messages?',
+      explanation: 'Sliding Window is the simplest strategy - it keeps only the N most recent exchanges and discards older ones. While simple to implement, it loses older context completely, which may be problematic for conversations that reference earlier information.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'When would "Summarization" be a better strategy than "Sliding Window"?',
+      options: {
+        A: 'When you need the fastest possible responses',
+        B: 'When conversations are long and context from earlier turns remains relevant',
+        C: 'When tokens are unlimited',
+        D: 'When conversations are very short'
+      },
+      correct: 'B',
+      hint: 'Think about what summarization preserves that sliding window loses.',
+      explanation: 'Summarization shines in long conversations where context from earlier turns remains relevant. Instead of discarding old messages entirely (sliding window), it compresses them into a brief summary that preserves key information while freeing up tokens. This is essential for conversations where decisions or statements made 20 turns ago still matter.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'You\'re building a customer support chatbot with 8000 token limit. Initial system prompt uses 500 tokens. Each exchange averages 200 tokens. What\'s your maximum conversation length before needing memory management?',
+      options: {
+        A: '10 exchanges',
+        B: '18 exchanges',
+        C: '37 exchanges',
+        D: '40 exchanges'
+      },
+      correct: 'B',
+      hint: 'Calculate: (total_tokens - system_tokens) / tokens_per_exchange. Remember each exchange has both user and assistant messages.',
+      explanation: 'Calculation: (8000 - 500) / 200 = 7500 / 200 = 37.5 exchanges. Wait, that\'s option C! But the question asks for MAXIMUM before NEEDING management. At 37 exchanges you\'re at the limit. You need to start managing memory before hitting the limit, typically around 75-80% capacity. At 18-19 exchanges (3600-3800 tokens used), you should implement a strategy. The answer is B because you need to be proactive, not reactive.'
+    }
+  ]}
+/>
+
+### Token Budget Trade-offs
+
+Every memory strategy involves trade-offs:
+
+| Strategy | Token Efficiency | Context Preservation | Implementation Complexity |
+|----------|------------------|----------------------|---------------------------|
+| Sliding Window | ⭐⭐⭐ High | ⭐ Low | ⭐⭐⭐ Simple |
+| Summarization | ⭐⭐ Medium | ⭐⭐⭐ High | ⭐⭐ Medium |
+| Selective Retention | ⭐⭐ Medium | ⭐⭐ Medium | ⭐ Complex |
+| Hierarchical Memory | ⭐ Lower | ⭐⭐⭐ Highest | ⭐ Most Complex |
+
+Choose based on:
+- Conversation length expectations
+- Importance of historical context
+- Available development resources
+- Token budget constraints
+
+<QuizEmbed 
+  moduleId="module-2" 
+  section="integration"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'Which memory strategy has the highest implementation complexity?',
+      options: {
+        A: 'Sliding Window',
+        B: 'Summarization',
+        C: 'Hierarchical Memory',
+        D: 'They are all equally complex'
+      },
+      correct: 'C',
+      hint: 'Look at the trade-off table - which has one star for implementation?',
+      explanation: 'Hierarchical Memory is the most complex to implement because it requires managing multiple levels of compression - keeping recent details while maintaining older summaries at different granularities. It\'s the most sophisticated approach but requires significant development effort.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'A startup is building an MVP chatbot with limited dev time. They need conversations up to 10 exchanges. Which strategy should they use?',
+      options: {
+        A: 'Hierarchical Memory for best quality',
+        B: 'Sliding Window for simplicity',
+        C: 'Selective Retention for optimization',
+        D: 'Summarization for context preservation'
+      },
+      correct: 'B',
+      hint: 'Consider: MVP, limited dev time, only 10 exchanges needed.',
+      explanation: 'For an MVP with limited resources and short conversations (10 exchanges), Sliding Window is perfect. It\'s the simplest to implement (⭐⭐⭐ simple) and 10 exchanges won\'t fill most context windows. The lost context from older messages won\'t matter much in such short interactions. Optimize later if needed.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'You\'re building a therapy chatbot that references events from months ago. Context preservation is critical. Token budget is generous. Which strategy and why?',
+      options: {
+        A: 'Sliding Window - it\'s most efficient',
+        B: 'Summarization - it preserves old context while managing tokens',
+        C: 'Hierarchical Memory - it provides both recent details and historical summaries',
+        D: 'Selective Retention - it keeps only important messages'
+      },
+      correct: 'C',
+      hint: 'The key phrases are "months ago", "critical", and "generous budget". What strategy preserves BOTH recent detail AND old context?',
+      explanation: 'Hierarchical Memory is optimal here because: (1) therapy requires referencing old conversations, (2) recent sessions need detail, (3) older sessions can be summarized, and (4) generous token budget supports the complexity. It maintains recent details while keeping compressed older summaries, perfect for long-term therapeutic relationships. Summarization alone might lose too much nuance from recent sessions.'
+    }
+  ]}
+/>
+
+---
+
+## Key Takeaways
+
+### Few-Shot Learning:
+1. **Molecular prompts** combine instructions with examples
+2. Provide **10-30% accuracy improvements** over atomic prompts
+3. Different templates suit different tasks (Prefix-Suffix, Input-Output, Chain-of-Thought)
+4. Diminishing returns occur as you add more examples
+5. Optimal number varies by task: 1-3 per class for classification, 2-5 for generation
+
+### Memory Management:
+6. LLMs are **stateless** by default - no memory between requests
+7. **Cells** add memory by including conversation history
+8. Context windows fill up as conversations grow
+9. Four main strategies: Sliding Window, Summarization, Selective Retention, Hierarchical
+10. Choose strategy based on conversation length, context importance, and resources
+
+---
+
+## Next Steps
+
+In **Module 3: Multi-Agent Systems**, we'll explore how to orchestrate multiple LLM "agents" working together, each with their own context and memory, to solve complex problems.
+
+---
+
+**Attribution:** This module is adapted from educational materials in the [davidkimai/Context-Engineering](https://github.com/davidkimai/Context-Engineering) repository. Original content by David Shapiro and contributors.
