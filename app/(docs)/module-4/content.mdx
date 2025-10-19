@@ -6,14 +6,891 @@ import ProgressTracker from '@/components/ProgressTracker';
 <ProgressTracker moduleId="module-4" />
 
 **Module Duration:** 90 minutes  
-**Source Material:** Adapted from [davidkimai/Context-Engineering](https://github.com/davidkimai/Context-Engineering)
+**Source Material:** [davidkimai/Context-Engineering](https://github.com/davidkimai/Context-Engineering)
+- Based on: Neural Systems - Cognitive Tools framework
 
 ---
 
-## Module Content Under Development
+> "The map is not the territory, but a good map helps you navigate the territory." — Alfred Korzybski
 
-This advanced module covers cutting-edge concepts in context engineering. Full content coming soon!
+## From Organs to Neural Systems
+
+We've progressed from **atoms** (basic prompts) through **molecules** (examples) and **cells** (memory) to **organs** (multi-agent systems). Now we ascend to **Neural Systems** — cognitive frameworks and mental models that help us think about and design context engineering solutions more effectively.
+
+```
+┌───────────────────────────────────────────────────────────────────┐
+│                      NEURAL SYSTEMS LEVEL                         │
+│                                                                   │
+│  ┌────────────────────────────────────────────────────────────┐   │
+│  │                                                            │   │
+│  │          Cognitive Tools & Mental Models                   │   │
+│  │                                                            │   │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │   │
+│  │  │              │  │              │  │              │      │   │
+│  │  │  Reasoning   │  │  Structured  │  │   Mental     │      │   │
+│  │  │  Patterns    │  │  Thinking    │  │   Models     │      │   │
+│  │  │              │  │              │  │              │      │   │
+│  │  └──────────────┘  └──────────────┘  └──────────────┘      │   │
+│  │                                                            │   │
+│  └────────────────────────────────────────────────────────────┘   │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+```
+
+Neural systems provide the cognitive frameworks that enable us to design more sophisticated context engineering solutions.
+
+## What Are Cognitive Tools?
+
+Cognitive tools are structured thinking frameworks that help both humans and LLMs approach problems more systematically:
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│ COGNITIVE TOOLS DEFINITION                                          │
+├─────────────────────────────────────────────────────────────────────┤
+│ ◆ Mental Models: Frameworks for understanding complex systems       │
+│ ◆ Reasoning Patterns: Structured approaches to problem-solving      │
+│ ◆ Thinking Protocols: Step-by-step cognitive procedures             │
+│ ◆ Abstraction Layers: Levels of conceptual organization             │
+│ ◆ Decision Frameworks: Systematic approaches to choices             │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+<QuizEmbed 
+  moduleId="module-4" 
+  section="introduction"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'What level comes after "Organs" in the context engineering hierarchy?',
+      options: {
+        A: 'Tissues',
+        B: 'Neural Systems',
+        C: 'Field Theory',
+        D: 'Quantum Semantics'
+      },
+      correct: 'B',
+      hint: 'Look at the biological metaphor progression',
+      explanation: 'After Organs (multi-agent systems), we ascend to Neural Systems, which provide cognitive frameworks and mental models for designing context engineering solutions.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'What is the primary purpose of cognitive tools in context engineering?',
+      options: {
+        A: 'To replace LLMs',
+        B: 'To provide structured thinking frameworks for systematic problem-solving',
+        C: 'To reduce token costs',
+        D: 'To increase response speed'
+      },
+      correct: 'B',
+      hint: 'Think about frameworks and structure',
+      explanation: 'Cognitive tools provide structured thinking frameworks that help both humans and LLMs approach problems more systematically, improving the design and effectiveness of context engineering solutions.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'How do neural systems differ from organs in the context engineering hierarchy?',
+      options: {
+        A: 'They process data faster',
+        B: 'They use fewer tokens',
+        C: 'They provide cognitive frameworks for thinking about design rather than implementation',
+        D: 'They require specialized hardware'
+      },
+      correct: 'C',
+      hint: 'Consider the shift from implementation to framework',
+      explanation: 'While organs are about multi-agent implementation, neural systems operate at a higher level - providing cognitive frameworks, mental models, and reasoning patterns that help us think about and design context engineering solutions more effectively.'
+    }
+  ]}
+/>
+
+## Mental Models for Context Engineering
+
+Mental models help us conceptualize and reason about context engineering systems:
+
+### 1. The Layered Context Model
+
+```
+┌───────────────────────────────────────────────────────────────┐
+│                    LAYERED CONTEXT MODEL                      │
+├───────────────────────────────────────────────────────────────┤
+│                                                               │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ Layer 5: Meta-Context (Reasoning about reasoning)       │  │
+│  └─────────────────────────────────────────────────────────┘  │
+│                            ▲                                  │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ Layer 4: Procedural Context (How to do things)          │  │
+│  └─────────────────────────────────────────────────────────┘  │
+│                            ▲                                  │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ Layer 3: Domain Context (Specialized knowledge)         │  │
+│  └─────────────────────────────────────────────────────────┘  │
+│                            ▲                                  │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ Layer 2: Task Context (Specific objectives)             │  │
+│  └─────────────────────────────────────────────────────────┘  │
+│                            ▲                                  │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ Layer 1: Base Context (Instructions & examples)         │  │
+│  └─────────────────────────────────────────────────────────┘  │
+│                                                               │
+└───────────────────────────────────────────────────────────────┘
+```
+
+Each layer builds upon the previous one, creating increasingly sophisticated reasoning capabilities.
+
+### 2. The Semantic Space Model
+
+Viewing context as a position in multi-dimensional semantic space:
+
+```
+                    Semantic Space
+              ┌─────────────────────────┐
+              │                         │
+              │    ●───────●            │
+              │   /         \           │
+              │  /   Region  \          │
+              │ ●    of       ●         │
+              │  \  Meaning  /          │
+              │   \         /           │
+              │    ●───────●            │
+              │                         │
+              │         ◎               │
+              │    (Target Context)     │
+              │                         │
+              └─────────────────────────┘
+```
+
+Context engineering becomes navigation through semantic space toward target meanings.
+
+### 3. The Information Flow Model
+
+Understanding how information moves through context systems:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                  INFORMATION FLOW MODEL                  │
+│                                                          │
+│  Input ──► Transform ──► Accumulate ──► Synthesize ──► Output │
+│             │              │               │              │
+│             ▼              ▼               ▼              │
+│          Filter        Remember         Integrate         │
+│          Validate      Prioritize       Reconcile         │
+│          Extract       Compress         Conclude          │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
+<QuizEmbed 
+  moduleId="module-4" 
+  section="mental-models"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'In the Layered Context Model, what is Layer 1 (the base)?',
+      options: {
+        A: 'Meta-Context',
+        B: 'Domain Context',
+        C: 'Base Context (Instructions & examples)',
+        D: 'Procedural Context'
+      },
+      correct: 'C',
+      hint: 'Start at the bottom of the layer diagram',
+      explanation: 'Layer 1 is the Base Context, which contains fundamental instructions and examples. Each subsequent layer builds upon this foundation.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'What does the Semantic Space Model help us visualize?',
+      options: {
+        A: 'Token usage over time',
+        B: 'Context as position in multi-dimensional meaning space',
+        C: 'API response times',
+        D: 'Memory storage capacity'
+      },
+      correct: 'B',
+      hint: 'Think about navigating through meaning',
+      explanation: 'The Semantic Space Model helps us visualize context as a position in multi-dimensional semantic space, where context engineering becomes navigation toward target meanings through this space.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'In the Information Flow Model, what are the three key operations performed during "Accumulate"?',
+      options: {
+        A: 'Filter, Validate, Extract',
+        B: 'Remember, Prioritize, Compress',
+        C: 'Integrate, Reconcile, Conclude',
+        D: 'Transform, Synthesize, Output'
+      },
+      correct: 'B',
+      hint: 'Look at the operations under Accumulate',
+      explanation: 'The Accumulate stage performs three operations: Remember (store information), Prioritize (determine importance), and Compress (reduce information density while preserving key content).'
+    }
+  ]}
+/>
+
+## Reasoning Patterns
+
+Structured approaches to problem-solving that can be embedded in prompts:
+
+### Chain-of-Thought (CoT) Reasoning
+
+Breaking complex problems into sequential steps:
+
+```
+Problem: "Calculate compound interest on $1000 at 5% for 3 years"
+
+Chain-of-Thought:
+┌─────────────────────────────────────────────────────────┐
+│ Step 1: Identify the formula                            │
+│ → A = P(1 + r)^t                                        │
+│                                                         │
+│ Step 2: Identify the values                             │
+│ → P = $1000, r = 0.05, t = 3                           │
+│                                                         │
+│ Step 3: Calculate (1 + r)                               │
+│ → 1 + 0.05 = 1.05                                      │
+│                                                         │
+│ Step 4: Calculate (1 + r)^t                             │
+│ → 1.05^3 = 1.157625                                    │
+│                                                         │
+│ Step 5: Calculate final amount                          │
+│ → $1000 × 1.157625 = $1,157.63                         │
+│                                                         │
+│ Answer: $1,157.63                                       │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Tree-of-Thoughts (ToT) Reasoning
+
+Exploring multiple reasoning paths:
+
+```
+                    Initial Problem
+                         │
+         ┌───────────────┼───────────────┐
+         │               │               │
+    Approach A      Approach B      Approach C
+         │               │               │
+    ┌────┴────┐     ┌────┴────┐     ┌────┴────┐
+    │         │     │         │     │         │
+  Step1    Step1'  Step1   Step1'  Step1   Step1'
+    │         │     │         │     │         │
+    ▼         ▼     ▼         ▼     ▼         ▼
+ Result1  Result1' Result2 Result2' Result3 Result3'
+    │         │     │         │     │         │
+    └─────────┴─────┴─────────┴─────┴─────────┘
+                    │
+                Evaluate & Select Best Path
+```
+
+### Self-Consistency Reasoning
+
+Generating multiple solutions and finding consensus:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│             SELF-CONSISTENCY PATTERN                     │
+│                                                          │
+│  Question: "What is the capital of Australia?"           │
+│                                                          │
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐          │
+│  │ Attempt 1  │  │ Attempt 2  │  │ Attempt 3  │          │
+│  │ Canberra   │  │ Canberra   │  │ Sydney?    │          │
+│  └────────────┘  └────────────┘  └────────────┘          │
+│         │               │               │                │
+│         └───────────────┴───────────────┘                │
+│                         │                                │
+│                         ▼                                │
+│              ┌──────────────────┐                         │
+│              │  Vote/Consensus  │                         │
+│              │  Answer: Canberra│                         │
+│              └──────────────────┘                         │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
+<QuizEmbed 
+  moduleId="module-4" 
+  section="reasoning-patterns"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'What is the key characteristic of Chain-of-Thought (CoT) reasoning?',
+      options: {
+        A: 'Using multiple LLMs simultaneously',
+        B: 'Breaking complex problems into sequential steps',
+        C: 'Generating random solutions',
+        D: 'Minimizing token usage'
+      },
+      correct: 'B',
+      hint: 'Think about the step-by-step approach',
+      explanation: 'Chain-of-Thought reasoning breaks complex problems into sequential steps, making the reasoning process explicit and allowing the LLM to work through problems methodically.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'How does Tree-of-Thoughts (ToT) differ from Chain-of-Thought?',
+      options: {
+        A: 'ToT is faster',
+        B: 'ToT explores multiple reasoning paths simultaneously rather than a single sequential chain',
+        C: 'ToT uses less memory',
+        D: 'ToT only works with mathematical problems'
+      },
+      correct: 'B',
+      hint: 'Consider the tree structure vs. chain structure',
+      explanation: 'Tree-of-Thoughts explores multiple reasoning paths (branches) simultaneously, evaluating different approaches and selecting the best path, unlike CoT which follows a single sequential chain.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'What is the main advantage of Self-Consistency reasoning?',
+      options: {
+        A: 'It is the fastest method',
+        B: 'It requires the fewest tokens',
+        C: 'It improves reliability by generating multiple solutions and finding consensus',
+        D: 'It works without examples'
+      },
+      correct: 'C',
+      hint: 'Think about why multiple attempts help',
+      explanation: 'Self-Consistency improves reliability by generating multiple independent solutions to the same problem and using voting/consensus to select the most consistent answer, reducing the impact of individual errors or hallucinations.'
+    }
+  ]}
+/>
+
+## Structured Thinking Protocols
+
+Step-by-step cognitive procedures that can be encoded in prompts:
+
+### The CRAFT Protocol
+
+**C**larify → **R**eason → **A**nalyze → **F**ormulate → **T**est
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                    CRAFT PROTOCOL                          │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  1. CLARIFY                                                 │
+│     • Identify the core problem                            │
+│     • Define success criteria                              │
+│     • List known constraints                               │
+│                                                            │
+│  2. REASON                                                  │
+│     • Break down into sub-problems                         │
+│     • Identify dependencies                                │
+│     • Consider multiple approaches                         │
+│                                                            │
+│  3. ANALYZE                                                 │
+│     • Evaluate each approach                               │
+│     • Consider edge cases                                  │
+│     • Assess feasibility                                   │
+│                                                            │
+│  4. FORMULATE                                               │
+│     • Develop detailed solution                            │
+│     • Structure implementation steps                       │
+│     • Prepare for execution                                │
+│                                                            │
+│  5. TEST                                                    │
+│     • Verify against requirements                          │
+│     • Check edge cases                                     │
+│     • Validate completeness                                │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+```
+
+### The Six Thinking Hats
+
+Different perspective-taking modes:
+
+```
+┌───────────────────────────────────────────────────────────┐
+│                 SIX THINKING HATS                         │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  🎩 WHITE HAT: Facts & Information                         │
+│     • What do we know?                                    │
+│     • What information is missing?                        │
+│                                                           │
+│  🔴 RED HAT: Emotions & Intuition                          │
+│     • How do we feel about this?                          │
+│     • What are our gut reactions?                         │
+│                                                           │
+│  ⚫ BLACK HAT: Critical Judgment                           │
+│     • What are the risks?                                 │
+│     • What could go wrong?                                │
+│                                                           │
+│  🟡 YELLOW HAT: Positive Outlook                           │
+│     • What are the benefits?                              │
+│     • What opportunities exist?                           │
+│                                                           │
+│  🟢 GREEN HAT: Creativity                                  │
+│     • What are alternative solutions?                     │
+│     • What new ideas can we generate?                     │
+│                                                           │
+│  🔵 BLUE HAT: Process Control                              │
+│     • What is our thinking process?                       │
+│     • How do we organize our approach?                    │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+```
+
+### The Socratic Method
+
+Question-driven exploration:
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                   SOCRATIC METHOD                         │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  1. Clarifying Questions                                  │
+│     • What do you mean by...?                            │
+│     • Can you give an example?                           │
+│                                                          │
+│  2. Probing Assumptions                                   │
+│     • What are we assuming here?                         │
+│     • Why would someone assume this?                     │
+│                                                          │
+│  3. Examining Evidence                                    │
+│     • What evidence supports this?                       │
+│     • How do we know this is true?                       │
+│                                                          │
+│  4. Exploring Implications                                │
+│     • What follows from this?                            │
+│     • What are the consequences?                         │
+│                                                          │
+│  5. Questioning the Question                              │
+│     • Why is this question important?                    │
+│     • Are we asking the right question?                  │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
+<QuizEmbed 
+  moduleId="module-4" 
+  section="protocols"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'What does CRAFT stand for in the CRAFT Protocol?',
+      options: {
+        A: 'Create, Run, Analyze, Finalize, Test',
+        B: 'Clarify, Reason, Analyze, Formulate, Test',
+        C: 'Calculate, Review, Apply, Format, Transmit',
+        D: 'Compile, Refactor, Annotate, Fix, Transfer'
+      },
+      correct: 'B',
+      hint: 'Look at the protocol breakdown',
+      explanation: 'CRAFT stands for Clarify (identify the problem), Reason (break down and consider approaches), Analyze (evaluate approaches), Formulate (develop solution), and Test (verify against requirements).'
+    },
+    {
+      difficulty: 'medium',
+      question: 'In the Six Thinking Hats method, which hat represents critical judgment and risk assessment?',
+      options: {
+        A: 'White Hat',
+        B: 'Red Hat',
+        C: 'Black Hat',
+        D: 'Yellow Hat'
+      },
+      correct: 'C',
+      hint: 'Think about negative/critical thinking',
+      explanation: 'The Black Hat represents critical judgment, focusing on risks, potential problems, and what could go wrong - providing necessary skepticism and risk assessment.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'What is the primary purpose of "Questioning the Question" in the Socratic Method?',
+      options: {
+        A: 'To confuse the respondent',
+        B: 'To ensure we are asking the right question and understand why it matters',
+        C: 'To avoid answering difficult questions',
+        D: 'To generate more questions'
+      },
+      correct: 'B',
+      hint: 'Consider meta-level reflection',
+      explanation: '"Questioning the Question" is meta-level reflection - examining whether we are asking the right question and understanding why it matters. This prevents spending effort on the wrong problem and helps clarify the true objective.'
+    }
+  ]}
+/>
+
+## Implementing Cognitive Tools in Prompts
+
+How to encode these frameworks in actual prompts:
+
+### Example: Chain-of-Thought in Prompt
+
+```
+SYSTEM PROMPT:
+You are a problem-solving assistant that uses explicit step-by-step reasoning.
+For each problem:
+1. Break it down into smaller components
+2. Solve each component explicitly
+3. Show your work at each step
+4. Synthesize the final answer
+
+USER QUERY:
+"A store sells apples for $2 each and oranges for $3 each.
+If I buy 5 apples and 3 oranges, and I have a 10% discount coupon,
+how much will I pay?"
+
+RESPONSE WITH CHAIN-OF-THOUGHT:
+Let me solve this step-by-step:
+
+Step 1: Calculate the cost of apples
+• 5 apples × $2 each = $10
+
+Step 2: Calculate the cost of oranges
+• 3 oranges × $3 each = $9
+
+Step 3: Calculate subtotal before discount
+• $10 (apples) + $9 (oranges) = $19
+
+Step 4: Calculate discount amount
+• 10% of $19 = $1.90
+
+Step 5: Calculate final price
+• $19 - $1.90 = $17.10
+
+Answer: You will pay $17.10
+```
+
+### Example: CRAFT Protocol in Prompt
+
+```
+SYSTEM PROMPT:
+You are a structured problem solver that follows the CRAFT protocol:
+- CLARIFY: Restate the problem and define success
+- REASON: Break down and explore approaches
+- ANALYZE: Evaluate each approach
+- FORMULATE: Develop detailed solution
+- TEST: Verify against requirements
+
+USER QUERY:
+"Design a system to automatically categorize customer support tickets"
+
+RESPONSE USING CRAFT:
+
+🔍 CLARIFY:
+Problem: Automatically categorize incoming support tickets by type
+Success criteria: Accurate categorization (>90%), Fast processing (<1 sec)
+Constraints: Must work with existing ticket system, Handle 1000+ tickets/day
+
+💭 REASON:
+Sub-problems:
+• Text understanding (parse ticket content)
+• Category definition (what categories exist?)
+• Classification logic (how to assign categories?)
+• Integration (how to connect with existing system?)
+
+Approaches:
+A) Rule-based (keywords → categories)
+B) ML classification (train on historical data)
+C) LLM-based (use GPT for understanding)
+
+🔬 ANALYZE:
+Approach A (Rule-based):
+  Pros: Fast, deterministic, easy to debug
+  Cons: Brittle, requires manual rules, poor with edge cases
+
+Approach B (ML classification):
+  Pros: Learns from data, adapts over time
+  Cons: Requires training data, black box, needs maintenance
+
+Approach C (LLM-based):
+  Pros: Flexible, handles nuance, no training needed
+  Cons: Slower, costs per request, requires prompt engineering
+
+📝 FORMULATE:
+Recommended: Hybrid approach
+1. Use rule-based for obvious cases (fast path)
+2. Use LLM for ambiguous cases (accuracy path)
+3. Track confidence scores
+4. Route to human for low-confidence cases
+
+Implementation:
+• Phase 1: Rule-based system with keyword matching
+• Phase 2: Add LLM layer for ambiguous tickets
+• Phase 3: Implement feedback loop for improvement
+
+✅ TEST:
+Verification checklist:
+☐ Handles all defined categories
+☐ Processes tickets within 1 second (average)
+☐ Achieves >90% accuracy on test set
+☐ Integrates with existing ticket API
+☐ Includes monitoring and alerting
+☐ Has fallback for edge cases
+```
+
+<QuizEmbed 
+  moduleId="module-4" 
+  section="implementation"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'In the Chain-of-Thought example, how many steps were used to solve the shopping problem?',
+      options: {
+        A: 'Three steps',
+        B: 'Four steps',
+        C: 'Five steps',
+        D: 'Six steps'
+      },
+      correct: 'C',
+      hint: 'Count the steps in the example',
+      explanation: 'The example uses five steps: (1) Calculate apple cost, (2) Calculate orange cost, (3) Calculate subtotal, (4) Calculate discount, (5) Calculate final price.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'In the CRAFT protocol example, what hybrid approach was recommended?',
+      options: {
+        A: 'Use only rule-based classification',
+        B: 'Use rule-based for obvious cases and LLM for ambiguous cases',
+        C: 'Use only ML classification',
+        D: 'Use only LLM-based classification'
+      },
+      correct: 'B',
+      hint: 'Look at the FORMULATE section',
+      explanation: 'The recommended hybrid approach uses rule-based classification for obvious cases (fast path) and LLM-based classification for ambiguous cases (accuracy path), combining the strengths of both methods.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'Why is the TEST phase critical in the CRAFT protocol implementation?',
+      options: {
+        A: 'It reduces token costs',
+        B: 'It verifies the solution meets requirements and identifies gaps before deployment',
+        C: 'It makes the system faster',
+        D: 'It automatically fixes bugs'
+      },
+      correct: 'B',
+      hint: 'Consider verification and validation',
+      explanation: 'The TEST phase is critical because it systematically verifies that the proposed solution meets all requirements (>90% accuracy, <1 sec processing, API integration, etc.) and identifies any gaps or missing components before deployment, preventing costly issues later.'
+    }
+  ]}
+/>
+
+## Abstraction Layers in Context Engineering
+
+Organizing context at different levels of abstraction:
+
+```
+┌────────────────────────────────────────────────────────────┐
+│             ABSTRACTION LAYER HIERARCHY                    │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  Level 4: PRINCIPLES                                        │
+│  │  • General laws and patterns                           │
+│  │  • Domain-independent wisdom                           │
+│  │  Example: "Break complex problems into simpler parts"  │
+│  │                                                         │
+│  ▼                                                         │
+│  Level 3: FRAMEWORKS                                        │
+│  │  • Structured approaches                               │
+│  │  • Methodologies                                       │
+│  │  Example: "Use CRAFT protocol for problem-solving"    │
+│  │                                                         │
+│  ▼                                                         │
+│  Level 2: PROCEDURES                                        │
+│  │  • Specific steps                                      │
+│  │  • Concrete actions                                    │
+│  │  Example: "First clarify, then reason, then analyze..." │
+│  │                                                         │
+│  ▼                                                         │
+│  Level 1: INSTRUCTIONS                                      │
+│  │  • Direct commands                                     │
+│  │  • Literal actions                                     │
+│  │  Example: "List all assumptions you are making"       │
+│  │                                                         │
+│  ▼                                                         │
+│  EXECUTION                                                  │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+```
+
+Higher levels provide more flexibility but require more interpretation. Lower levels provide more control but less adaptability.
+
+## Decision Frameworks
+
+Systematic approaches to making choices:
+
+### The Decision Matrix
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                   DECISION MATRIX                         │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  Criteria  │  Weight │ Option A │ Option B │ Option C    │
+│ ───────────┼─────────┼──────────┼──────────┼──────────    │
+│  Accuracy  │   40%   │    8     │    9     │    6        │
+│  Speed     │   30%   │    6     │    7     │    9        │
+│  Cost      │   20%   │    9     │    5     │    7        │
+│  Simplicity│   10%   │    7     │    6     │    8        │
+│ ───────────┼─────────┼──────────┼──────────┼──────────    │
+│  TOTAL     │  100%   │   7.6    │   7.3    │   7.4       │
+│                                                          │
+│  Best Option: Option A (7.6 weighted score)               │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
+### The Eisenhower Matrix
+
+Prioritizing tasks by urgency and importance:
+
+```
+                  URGENT              NOT URGENT
+               │                  │
+    IMPORTANT  │   1. DO NOW       │  2. SCHEDULE
+               │   • Critical bugs │  • Research
+               │   • Deadlines     │  • Planning
+               │                  │
+  ─────────────┼──────────────────┼──────────────────
+               │                  │
+NOT IMPORTANT  │   3. DELEGATE     │  4. ELIMINATE
+               │   • Routine tasks │  • Time wasters
+               │   • Interruptions │  • Busy work
+               │                  │
+```
+
+<QuizEmbed 
+  moduleId="module-4" 
+  section="abstraction-decisions"
+  quizzes={[
+    {
+      difficulty: 'simple',
+      question: 'In the Abstraction Layer Hierarchy, which level provides the most flexibility?',
+      options: {
+        A: 'Level 1: Instructions',
+        B: 'Level 2: Procedures',
+        C: 'Level 3: Frameworks',
+        D: 'Level 4: Principles'
+      },
+      correct: 'D',
+      hint: 'Higher levels = more flexibility',
+      explanation: 'Level 4 (Principles) provides the most flexibility because principles are general laws and domain-independent wisdom that can be applied in many contexts, though they require more interpretation than concrete instructions.'
+    },
+    {
+      difficulty: 'medium',
+      question: 'In the Decision Matrix example, why did Option A win despite Option B having higher accuracy?',
+      options: {
+        A: 'Option A was faster',
+        B: 'Option A was cheaper',
+        C: 'Option A had the highest weighted score across all criteria',
+        D: 'Option A was randomly selected'
+      },
+      correct: 'C',
+      hint: 'Consider the weighted scores',
+      explanation: 'Option A won with a weighted score of 7.6 because while Option B had higher accuracy (9 vs 8), Option A scored better on other weighted criteria, resulting in the highest overall weighted score when all factors were combined.'
+    },
+    {
+      difficulty: 'hard',
+      question: 'According to the Eisenhower Matrix, what should you do with tasks that are Important but Not Urgent?',
+      options: {
+        A: 'Do them now',
+        B: 'Schedule them for later',
+        C: 'Delegate them',
+        D: 'Eliminate them'
+      },
+      correct: 'B',
+      hint: 'Look at quadrant 2',
+      explanation: 'Tasks that are Important but Not Urgent (Quadrant 2) should be scheduled for later. These are activities like research and planning that contribute to long-term success but don\'t require immediate attention, unlike Quadrant 1 (Do Now) tasks.'
+    }
+  ]}
+/>
+
+## Applying Cognitive Tools to Context Engineering
+
+Practical applications of these frameworks:
+
+### Using Mental Models for System Design
+
+When designing a multi-agent system, use the Layered Context Model to organize:
+
+```
+Layer 5 (Meta): Orchestration logic deciding which agents to use
+Layer 4 (Procedural): Agent protocols and interaction patterns
+Layer 3 (Domain): Specialized knowledge for each agent
+Layer 2 (Task): Current objective and constraints
+Layer 1 (Base): Core instructions and examples
+```
+
+### Using Reasoning Patterns for Error Recovery
+
+When an agent produces an error, apply Tree-of-Thoughts:
+
+```
+1. Generate multiple alternative approaches
+2. Explore each branch independently
+3. Evaluate which path recovers successfully
+4. Select and execute the best recovery path
+```
+
+### Using Protocols for Quality Assurance
+
+Apply CRAFT to verify context engineering solutions:
+
+```
+CLARIFY: What does success look like?
+REASON: Why might this fail?
+ANALYZE: What are the weak points?
+FORMULATE: How can we improve?
+TEST: Does it meet all requirements?
+```
+
+## Key Takeaways
+
+1. **Neural Systems** provide cognitive frameworks beyond implementation
+2. **Mental Models** help conceptualize complex context engineering systems
+3. **Reasoning Patterns** (CoT, ToT, Self-Consistency) improve problem-solving
+4. **Thinking Protocols** (CRAFT, Six Hats, Socratic Method) structure cognition
+5. **Abstraction Layers** organize context at different conceptual levels
+6. **Decision Frameworks** enable systematic choice-making
+7. **Cognitive Tools** can be embedded directly in prompts for better results
+
+## Exercises for Practice
+
+1. Apply the CRAFT protocol to designing a new context engineering system
+2. Create a Decision Matrix for choosing between different prompt strategies
+3. Implement Chain-of-Thought reasoning in a complex problem domain
+4. Use the Layered Context Model to organize a multi-agent application
+5. Apply Six Thinking Hats to evaluate a context engineering solution
+
+## Next Steps
+
+You've now explored cognitive tools and mental models. Next:
+- **Module 5**: Field Theory - Understanding context as continuous semantic fields
+- **Module 6**: Meta-Recursion - Quantum semantics and unified frameworks
+
+These cognitive tools will serve as the foundation for understanding more advanced field-theoretic approaches to context engineering.
 
 ---
 
-**Attribution:** This module is adapted from educational materials in the [davidkimai/Context-Engineering](https://github.com/davidkimai/Context-Engineering) repository.
+## Attribution
+
+**Content adapted from:** [Context-Engineering](https://github.com/davidkimai/Context-Engineering) by davidkimai
+
+**Licensed under:** MIT License
+
+**Based on:** Neural Systems concepts from the Context Engineering framework
+
+**Copyright:** © 2025 davidkimai
+
+**MIT License:**
+
+```
+MIT License
+
+Copyright (c) 2025 davidkimai
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```

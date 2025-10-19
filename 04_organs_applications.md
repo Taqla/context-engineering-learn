@@ -1,16 +1,3 @@
-import QuizEmbed from '@/components/QuizEmbed';
-import ProgressTracker from '@/components/ProgressTracker';
-
-# Module 3: Multi-Agent Systems
-
-<ProgressTracker moduleId="module-3" />
-
-**Module Duration:** 120 minutes  
-**Source Material:** [davidkimai/Context-Engineering](https://github.com/davidkimai/Context-Engineering)
-- 00_foundations/04_organs_applications.md
-
----
-
 # Organs: Multi-Agent Systems and Applications
 
 > "The whole is greater than the sum of its parts." — Aristotle
@@ -56,52 +43,6 @@ Even the most sophisticated context cell has inherent limitations:
 ```
 
 Organs overcome these limitations through specialization, parallelization, and orchestration.
-
-<QuizEmbed 
-  moduleId="module-3" 
-  section="introduction"
-  quizzes={[
-    {
-      difficulty: 'simple',
-      question: 'What is a context "organ" in context engineering?',
-      options: {
-        A: 'A single LLM with enhanced capabilities',
-        B: 'A coordinated system of multiple context cells working together',
-        C: 'A type of prompt template',
-        D: 'An external database for memory storage'
-      },
-      correct: 'B',
-      hint: 'Think about the biological metaphor',
-      explanation: 'An organ is a coordinated system of multiple context cells (like biological organs composed of specialized cells) working together to accomplish complex tasks beyond the capability of any single context.'
-    },
-    {
-      difficulty: 'medium',
-      question: 'Which of the following is NOT listed as a limitation of single-context systems?',
-      options: {
-        A: 'Context window size constraints',
-        B: 'No parallel processing capability',
-        C: 'High computational cost',
-        D: 'Single point of failure'
-      },
-      correct: 'C',
-      hint: 'Review the "SINGLE-CONTEXT LIMITATIONS" box',
-      explanation: 'High computational cost is not listed as a limitation. The six limitations mentioned are: context window size constraints, no parallel processing, single perspective/reasoning approach, limited tool use capabilities, complexity ceiling, and single point of failure.'
-    },
-    {
-      difficulty: 'hard',
-      question: 'How do organs overcome the limitations of single contexts?',
-      options: {
-        A: 'By using larger models',
-        B: 'By increasing token limits',
-        C: 'Through specialization, parallelization, and orchestration',
-        D: 'By using multiple API keys'
-      },
-      correct: 'C',
-      hint: 'Consider the three key strategies mentioned',
-      explanation: 'Organs overcome single-context limitations through three key strategies: specialization (different cells handle different aspects), parallelization (processing multiple tasks simultaneously), and orchestration (coordinating the cells effectively).'
-    }
-  ]}
-/>
 
 ## The Anatomy of an Organ
 
@@ -209,52 +150,6 @@ Each cell in the organ has a specialized role:
 
 These are just examples—cells can be specialized for any task or domain.
 
-<QuizEmbed 
-  moduleId="module-3" 
-  section="anatomy"
-  quizzes={[
-    {
-      difficulty: 'simple',
-      question: 'What are the three main components of a context organ?',
-      options: {
-        A: 'Input, Processing, Output',
-        B: 'Orchestrator, Shared Memory, Specialist Cells',
-        C: 'Model, Prompt, Response',
-        D: 'Query, Database, Results'
-      },
-      correct: 'B',
-      hint: 'Look at the anatomy diagram',
-      explanation: 'The three main components are: the Orchestrator (coordinates cells), Shared Memory (central information repository), and Specialist Cells (perform specialized tasks).'
-    },
-    {
-      difficulty: 'medium',
-      question: 'What is the primary responsibility of the Orchestrator component?',
-      options: {
-        A: 'Storing conversation history',
-        B: 'Generating responses',
-        C: 'Coordinating cells, managing workflows and information routing',
-        D: 'Performing calculations'
-      },
-      correct: 'C',
-      hint: 'Think about the "brain" function',
-      explanation: 'The Orchestrator is the "brain" of the organ, responsible for task decomposition, cell selection and sequencing, information routing, conflict resolution, progress monitoring, and output synthesis.'
-    },
-    {
-      difficulty: 'hard',
-      question: 'Which type of shared memory stores "current task state and intermediate results"?',
-      options: {
-        A: 'Knowledge Base',
-        B: 'Working Memory',
-        C: 'Process Log',
-        D: 'Output Buffer'
-      },
-      correct: 'B',
-      hint: 'Review the SHARED MEMORY TYPES table',
-      explanation: 'Working Memory stores current task state and intermediate results, similar to human working memory that holds information temporarily during active processing.'
-    }
-  ]}
-/>
-
 ## Control Flow Patterns: How Organs Process Information
 
 Different organs use different information flow patterns:
@@ -310,52 +205,6 @@ Different organs use different information flow patterns:
 
 The choice of pattern depends on the task structure, parallelization potential, and complexity.
 
-<QuizEmbed 
-  moduleId="module-3" 
-  section="control-flow"
-  quizzes={[
-    {
-      difficulty: 'simple',
-      question: 'Which control flow pattern is best for step-by-step processes with clear dependencies?',
-      options: {
-        A: 'Parallel (Map-Reduce)',
-        B: 'Sequential (Pipeline)',
-        C: 'Feedback Loop',
-        D: 'Hierarchical'
-      },
-      correct: 'B',
-      hint: 'Think about one cell feeding into the next',
-      explanation: 'Sequential (Pipeline) pattern is best for step-by-step processes with clear dependencies, where each cell\'s output becomes the next cell\'s input in a linear flow.'
-    },
-    {
-      difficulty: 'medium',
-      question: 'What is the key advantage of the Parallel (Map-Reduce) pattern?',
-      options: {
-        A: 'It uses fewer tokens',
-        B: 'It can process independent subtasks simultaneously',
-        C: 'It has better accuracy',
-        D: 'It requires fewer cells'
-      },
-      correct: 'B',
-      hint: 'Consider what "parallel" means',
-      explanation: 'The Parallel (Map-Reduce) pattern splits work into independent subtasks that can be processed simultaneously by different cells, then merges the results, dramatically reducing overall processing time.'
-    },
-    {
-      difficulty: 'hard',
-      question: 'Which control flow pattern would be most appropriate for a quality improvement system that iteratively refines outputs?',
-      options: {
-        A: 'Sequential (Pipeline)',
-        B: 'Parallel (Map-Reduce)',
-        C: 'Feedback Loop',
-        D: 'Hierarchical'
-      },
-      correct: 'C',
-      hint: 'Look for the pattern that loops back',
-      explanation: 'The Feedback Loop pattern is designed for iterative refinement and quality improvement, where outputs cycle back through cells for continuous enhancement until quality criteria are met.'
-    }
-  ]}
-/>
-
 ## ReAct: A Foundational Organ Pattern
 
 One of the most powerful organ patterns is ReAct (Reasoning + Acting):
@@ -383,52 +232,6 @@ Each cycle involves:
 4. Repeat until the task is complete
 
 This pattern enables a powerful combination of reasoning and tool use.
-
-<QuizEmbed 
-  moduleId="module-3" 
-  section="react"
-  quizzes={[
-    {
-      difficulty: 'simple',
-      question: 'What does "ReAct" stand for in the ReAct pattern?',
-      options: {
-        A: 'React to Actions',
-        B: 'Reasoning + Acting',
-        C: 'Real-time Actions',
-        D: 'Recursive Action'
-      },
-      correct: 'B',
-      hint: 'Look at the subtitle of the ReAct section',
-      explanation: 'ReAct stands for Reasoning + Acting, combining the LLM\'s ability to reason about problems with the ability to take actions using tools.'
-    },
-    {
-      difficulty: 'medium',
-      question: 'What are the three steps in each ReAct cycle, in order?',
-      options: {
-        A: 'Action → Thought → Observation',
-        B: 'Observation → Thought → Action',
-        C: 'Thought → Action → Observation',
-        D: 'Thought → Observation → Action'
-      },
-      correct: 'C',
-      hint: 'Follow the arrows in the diagram',
-      explanation: 'Each ReAct cycle follows this order: 1) Thought (reasoning about what to do), 2) Action (executing a tool or operation), 3) Observation (interpreting the results), then loops back to Thought.'
-    },
-    {
-      difficulty: 'hard',
-      question: 'What capability does the ReAct pattern enable that makes it particularly powerful?',
-      options: {
-        A: 'Faster response times',
-        B: 'Lower token usage',
-        C: 'Combination of reasoning and tool use in an iterative loop',
-        D: 'Parallel processing of multiple queries'
-      },
-      correct: 'C',
-      hint: 'Consider what makes it different from simple tool calling',
-      explanation: 'ReAct\'s power comes from combining reasoning (thinking about what to do) with tool use (taking actions) in an iterative feedback loop, allowing the system to adapt its approach based on observations and continue until the task is complete.'
-    }
-  ]}
-/>
 
 ## A Simple Organ Implementation
 
@@ -560,52 +363,6 @@ class ContextOrgan:
 ```
 
 This simple organ follows a sequential pipeline pattern, with information flowing from research to analysis to content creation.
-
-<QuizEmbed 
-  moduleId="module-3" 
-  section="implementation"
-  quizzes={[
-    {
-      difficulty: 'simple',
-      question: 'In the ContextOrgan implementation, how many specialized cells are created?',
-      options: {
-        A: 'Two',
-        B: 'Three',
-        C: 'Four',
-        D: 'Five'
-      },
-      correct: 'B',
-      hint: 'Count the cells in the __init__ method',
-      explanation: 'The ContextOrgan creates three specialized cells: researcher (information gathering), reasoner (analysis and reasoning), and writer (content creation).'
-    },
-    {
-      difficulty: 'medium',
-      question: 'What is the purpose of the shared_memory dictionary in the ContextOrgan?',
-      options: {
-        A: 'To store LLM API keys',
-        B: 'To pass information between cells',
-        C: 'To cache responses',
-        D: 'To log errors'
-      },
-      correct: 'B',
-      hint: 'Look at how it\'s used in process_query()',
-      explanation: 'The shared_memory dictionary enables information flow between cells. For example, research findings are stored in shared_memory and made available to the reasoner cell, and analysis results are passed to the writer cell.'
-    },
-    {
-      difficulty: 'hard',
-      question: 'What happens when a cell\'s memory exceeds max_turns in the implementation?',
-      options: {
-        A: 'An error is thrown',
-        B: 'All memory is cleared',
-        C: 'The oldest exchanges are pruned, keeping only the most recent max_turns',
-        D: 'The memory limit is automatically increased'
-      },
-      correct: 'C',
-      hint: 'Look at the end of the _call_cell method',
-      explanation: 'When memory exceeds max_turns, the implementation uses windowing: it keeps only the most recent max_turns exchanges by slicing the memory array ([-self.cells[cell_name]["max_turns"]:]), effectively pruning the oldest exchanges.'
-    }
-  ]}
-/>
 
 ## Advanced Organ Patterns
 
@@ -744,52 +501,6 @@ This pattern creates a structured debate between multiple perspectives, leading 
 
 This fractal approach enables complex hierarchical processing, with each sub-organ handling a different aspect of the overall task.
 
-<QuizEmbed 
-  moduleId="module-3" 
-  section="advanced-patterns"
-  quizzes={[
-    {
-      difficulty: 'simple',
-      question: 'What is the primary advantage of a Tool-Using Agent organ?',
-      options: {
-        A: 'It uses less memory',
-        B: 'It can select and use various external tools to accomplish tasks',
-        C: 'It processes data faster',
-        D: 'It requires fewer API calls'
-      },
-      correct: 'B',
-      hint: 'Think about the "Swiss Army Knife" metaphor',
-      explanation: 'The Tool-Using Agent organ enables an LLM to select and use various tools (web search, databases, code execution, etc.) to accomplish tasks, similar to function calling capabilities in modern LLM APIs.'
-    },
-    {
-      difficulty: 'medium',
-      question: 'What is the main benefit of the Debate Organ pattern?',
-      options: {
-        A: 'Faster processing through parallel cells',
-        B: 'Lower token costs',
-        C: 'More thorough and balanced analysis through multiple perspectives',
-        D: 'Simpler implementation'
-      },
-      correct: 'C',
-      hint: 'Consider what multiple perspectives contribute',
-      explanation: 'The Debate Organ creates a structured debate between multiple perspective cells, with a moderator coordinating multi-round discussion, leading to more thorough and balanced analysis than a single perspective could provide.'
-    },
-    {
-      difficulty: 'hard',
-      question: 'What makes the Recursive Organ pattern "fractal"?',
-      options: {
-        A: 'It uses mathematical fractals for processing',
-        B: 'It contains organs within organs, with each sub-organ handling different aspects',
-        C: 'It processes data recursively in loops',
-        D: 'It generates self-similar outputs'
-      },
-      correct: 'B',
-      hint: 'Look at the subtitle "Organs Within Organs"',
-      explanation: 'The Recursive Organ is "fractal" because it contains organs within organs (Research Organ, Reasoning Organ, Output Organ), with each sub-organ itself being a complete organ handling a different aspect of the task, creating hierarchical composition.'
-    }
-  ]}
-/>
-
 ## Real-World Applications
 
 Context organs enable sophisticated applications that were impossible with simpler context structures:
@@ -851,52 +562,6 @@ As with all context engineering, measurement is key:
 
 Tracking these metrics helps identify bottlenecks and optimization opportunities.
 
-<QuizEmbed 
-  moduleId="module-3" 
-  section="applications"
-  quizzes={[
-    {
-      difficulty: 'simple',
-      question: 'Which of the following is listed as an organ-based application?',
-      options: {
-        A: 'Simple text generation',
-        B: 'Autonomous agents with planning, execution, and reflection',
-        C: 'Basic keyword search',
-        D: 'Single-step calculations'
-      },
-      correct: 'B',
-      hint: 'Look at the ORGAN-BASED APPLICATIONS box',
-      explanation: 'Autonomous agents with planning, execution, and reflection is one of the seven organ-based applications listed, along with research assistants, code generation, content creation, data analysis, complex problem solving, and interactive learning.'
-    },
-    {
-      difficulty: 'medium',
-      question: 'What is the target end-to-end accuracy metric for organ systems?',
-      options: {
-        A: '>70%',
-        B: '>80%',
-        C: '>90%',
-        D: '>95%'
-      },
-      correct: 'C',
-      hint: 'Check the ORGAN METRICS table',
-      explanation: 'The target end-to-end accuracy for organ systems is greater than 90%, reflecting the high quality standards expected from these sophisticated multi-cell systems.'
-    },
-    {
-      difficulty: 'hard',
-      question: 'Why is "Specialization Clarity" listed as an organ optimization factor?',
-      options: {
-        A: 'It reduces token costs',
-        B: 'Clearly defined cell roles improve coordination and prevent overlap',
-        C: 'It makes debugging easier',
-        D: 'It increases processing speed'
-      },
-      correct: 'B',
-      hint: 'Consider how cell roles affect the organ\'s function',
-      explanation: 'Specialization Clarity - how clearly defined each cell\'s role is - is critical because clear role definition improves coordination between cells, prevents redundant work, ensures each cell contributes its unique expertise, and makes the overall organ function more effectively.'
-    }
-  ]}
-/>
-
 ## Emergent Properties: The Magic of Organs
 
 The most fascinating aspect of context organs is their emergent properties—capabilities that arise from the system as a whole rather than from any individual cell:
@@ -916,52 +581,6 @@ The most fascinating aspect of context organs is their emergent properties—cap
 ```
 
 These emergent capabilities enable entirely new classes of applications that would be impossible with simpler context structures.
-
-<QuizEmbed 
-  moduleId="module-3" 
-  section="emergent"
-  quizzes={[
-    {
-      difficulty: 'simple',
-      question: 'What are "emergent properties" in the context of organs?',
-      options: {
-        A: 'Properties that must be programmed explicitly',
-        B: 'Capabilities that arise from the system as a whole rather than individual cells',
-        C: 'Features that appear randomly',
-        D: 'Properties copied from human organs'
-      },
-      correct: 'B',
-      hint: 'Think about system-level vs. component-level capabilities',
-      explanation: 'Emergent properties are capabilities that arise from the interaction and coordination of the system as a whole, rather than being inherent in any individual cell - similar to how consciousness emerges from neurons.'
-    },
-    {
-      difficulty: 'medium',
-      question: 'Which emergent property enables organs to handle problems larger than any single context window?',
-      options: {
-        A: 'Domain-specific expertise through specialization',
-        B: 'Self-correction through verification cells',
-        C: 'The coordinated processing of information across multiple cells',
-        D: 'Resilience against individual cell failures'
-      },
-      correct: 'C',
-      hint: 'Consider how organs distribute work across cells',
-      explanation: 'By distributing work across multiple cells with shared memory and coordination, organs can process information that exceeds any single context window - each cell handles manageable chunks while the organ synthesizes the complete result.'
-    },
-    {
-      difficulty: 'hard',
-      question: 'How do organs achieve "resilience against individual cell failures"?',
-      options: {
-        A: 'By using only the most reliable LLMs',
-        B: 'Through redundancy and verification cells that can catch and correct errors',
-        C: 'By retrying failed operations indefinitely',
-        D: 'By reducing the complexity of tasks'
-      },
-      correct: 'B',
-      hint: 'Think about how multiple cells provide checks and balances',
-      explanation: 'Resilience emerges from having multiple cells (including specialized verification/evaluation cells) that can catch errors from other cells, provide alternative perspectives, and correct mistakes - no single cell failure dooms the entire task.'
-    }
-  ]}
-/>
 
 ## Beyond Context Windows: Breaking the Size Barrier
 
@@ -1024,7 +643,7 @@ At the highest level, organs can be combined into complete cognitive architectur
 
 This approach mirrors theories of human cognition, with specialized systems for perception, reasoning, memory, and action working together to create a unified intelligence.
 
-## Implementing a Functional Organ: Content Creation Example
+## Implementing a Functional Organ: Code Example
 
 Let's implement a more sophisticated organ for content creation:
 
@@ -1196,52 +815,6 @@ This implementation demonstrates:
 3. Shared memory to pass information between cells
 4. A complete pipeline from planning to finished content
 
-<QuizEmbed 
-  moduleId="module-3" 
-  section="implementation-advanced"
-  quizzes={[
-    {
-      difficulty: 'simple',
-      question: 'How many specialized cells does the ContentCreationOrgan implement?',
-      options: {
-        A: 'Three',
-        B: 'Four',
-        C: 'Five',
-        D: 'Six'
-      },
-      correct: 'C',
-      hint: 'Count the cells in the cells dictionary',
-      explanation: 'The ContentCreationOrgan implements five specialized cells: planner, researcher, writer, editor, and fact_checker, each with a distinct role in the content creation pipeline.'
-    },
-    {
-      difficulty: 'medium',
-      question: 'What is the purpose of the fact_checker cell in the content creation pipeline?',
-      options: {
-        A: 'To write initial content',
-        B: 'To verify factual claims and flag inaccuracies',
-        C: 'To plan the content structure',
-        D: 'To format the final output'
-      },
-      correct: 'B',
-      hint: 'Look at the fact_checker system prompt',
-      explanation: 'The fact_checker cell specializes in verifying factual claims in the drafted content, flagging suspicious or inaccurate statements, and providing corrections with references, ensuring accuracy before the final editing phase.'
-    },
-    {
-      difficulty: 'hard',
-      question: 'Why does the ContentCreationOrgan use sequential processing rather than parallel?',
-      options: {
-        A: 'Sequential is always faster',
-        B: 'Each step depends on outputs from previous steps (content plan → research → draft → fact-check → edit)',
-        C: 'Parallel processing is not supported',
-        D: 'Sequential uses fewer tokens'
-      },
-      correct: 'B',
-      hint: 'Consider the dependencies between stages',
-      explanation: 'The ContentCreationOrgan uses sequential (pipeline) processing because each stage has clear dependencies: the planner creates an outline, researcher gathers information based on that outline, writer creates a draft using the research, fact-checker verifies the draft, and editor refines it - each step requires the previous step\'s output.'
-    }
-  ]}
-/>
-
 ## The Challenges of Organ Design
 
 Building effective organs comes with several challenges:
@@ -1282,51 +855,80 @@ From experience with complex organs, several best practices have emerged:
 
 Following these practices leads to more robust and effective organ systems.
 
-<QuizEmbed 
-  moduleId="module-3" 
-  section="challenges-practices"
-  quizzes={[
-    {
-      difficulty: 'simple',
-      question: 'What is "error propagation" in organ systems?',
-      options: {
-        A: 'Errors that occur during data transmission',
-        B: 'Mistakes that can cascade through the system from cell to cell',
-        C: 'Errors in the LLM API',
-        D: 'Syntax errors in code'
-      },
-      correct: 'B',
-      hint: 'Think about how mistakes move through connected cells',
-      explanation: 'Error propagation occurs when a mistake made by one cell gets passed to subsequent cells, which may build upon or amplify the error, causing it to cascade through the system - like a game of telephone where errors compound.'
-    },
-    {
-      difficulty: 'medium',
-      question: 'According to best practices, what should you do before building a complex organ?',
-      options: {
-        A: 'Deploy immediately to production',
-        B: 'Start simple with minimal organs and add complexity as needed',
-        C: 'Build all features at once',
-        D: 'Use only the largest LLMs available'
-      },
-      correct: 'B',
-      hint: 'Look at the first best practice listed',
-      explanation: 'The first best practice is "Start Simple": begin with minimal organs and add complexity as needed. This approach allows you to validate basic functionality, understand interactions, and build incrementally rather than creating an overly complex system from the start.'
-    },
-    {
-      difficulty: 'hard',
-      question: 'Why is "Comprehensive Logging" listed as a best practice for organ engineering?',
-      options: {
-        A: 'It reduces token costs',
-        B: 'It makes the system faster',
-        C: 'It helps trace complex interactions and debug issues in multi-cell systems',
-        D: 'It is required by LLM APIs'
-      },
-      correct: 'C',
-      hint: 'Consider the debugging difficulty challenge',
-      explanation: 'Comprehensive logging is essential because organ systems have complex interactions between cells that can be hard to trace. Logging all inter-cell communications helps debug issues, understand error propagation, identify bottlenecks, and validate that information flows correctly through the system.'
-    }
-  ]}
-/>
+## From Theory to Practice: A Complete Example
+
+To bring everything together, let's consider a complete organ system for data analysis:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        DATA ANALYSIS ORGAN SYSTEM                           │
+│                                                                             │
+│  ┌─────────────┐                                                            │
+│  │             │                      ┌──────────────────────┐              │
+│  │ User Query  │─────────────────────►│ Query Understanding  │              │
+│  │             │                      │ Cell                 │              │
+│  └─────────────┘                      └──────────────────────┘              │
+│                                                 │                           │
+│                                                 ▼                           │
+│                      ┌──────────────────────────────────────────┐           │
+│                      │            Data Processing Organ         │           │
+│                      │                                          │           │
+│                      │   ┌─────────────┐     ┌─────────────┐    │           │
+│                      │   │             │     │             │    │           │
+│                      │   │ Data        │────►│ Cleaning    │    │           │
+│                      │   │ Loading     │     │ Cell        │    │           │
+│                      │   │             │     │             │    │           │
+│                      │   └─────────────┘     └─────────────┘    │           │
+│                      │                             │            │           │
+│                      │                             ▼            │           │
+│                      │   ┌─────────────┐     ┌─────────────┐    │           │
+│                      │   │             │     │             │    │           │
+│                      │   │ Feature     │◄────┤ Validation  │    │           │
+│                      │   │ Engineering │     │ Cell        │    │           │
+│                      │   │             │     │             │    │           │
+│                      │   └─────────────┘     └─────────────┘    │           │
+│                      │         │                                │           │
+│                      └─────────┼────────────────────────────────┘           │
+│                                │                                            │
+│                                ▼                                            │
+│                      ┌──────────────────────────────────────────┐           │
+│                      │           Analysis Organ                 │           │
+│                      │                                          │           │
+│                      │   ┌─────────────┐     ┌─────────────┐    │           │
+│                      │   │             │     │             │    │           │
+│                      │   │ Statistical │────►│ Insight     │    │           │
+│                      │   │ Analysis    │     │ Generation  │    │           │
+│                      │   │             │     │             │    │           │
+│                      │   └─────────────┘     └─────────────┘    │           │
+│                      │         │                   │            │           │
+│                      │         ▼                   ▼            │           │
+│                      │   ┌─────────────┐     ┌─────────────┐    │           │
+│                      │   │             │     │             │    │           │
+│                      │   │ Visualization◄────┤ Verification│    │           │
+│                      │   │ Cell        │     │ Cell        │    │           │
+│                      │   │             │     │             │    │           │
+│                      │   └─────────────┘     └─────────────┘    │           │
+│                      │         │                                │           │
+│                      └─────────┼────────────────────────────────┘           │
+│                                │                                            │
+│                                ▼                                            │
+│                      ┌──────────────────────┐                               │
+│                      │                      │                               │
+│                      │ Reporting Cell       │                               │
+│                      │                      │                               │
+│                      └──────────────────────┘                               │
+│                                │                                            │
+│                                ▼                                            │
+│                      ┌──────────────────────┐                               │
+│                      │                      │                               │
+│                      │ Final Report         │                               │
+│                      │                      │                               │
+│                      └──────────────────────┘                               │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+This system illustrates how multiple organs can work together to create a complete workflow, from raw data to final insights.
 
 ## Beyond Human Capabilities: What Organs Enable
 
@@ -1369,11 +971,11 @@ These capabilities open up entirely new possibilities for AI applications.
 
 You've now completed the foundations series, exploring the complete progression from atoms to organs. From here, you can:
 
-1. Dive into the hands-on guides to implement these concepts
-2. Explore reusable templates for quick implementation
-3. Study complete examples to see these principles in action
-4. Reference the detailed documentation for deeper understanding
-5. Continue to the advanced foundations: cognitive tools, field theory, and meta-recursion
+1. Dive into the hands-on guides in `10_guides_zero_to_hero/` to implement these concepts
+2. Explore the reusable templates in `20_templates/` for quick implementation
+3. Study the complete examples in `30_examples/` to see these principles in action
+4. Reference the detailed documentation in `40_reference/` for deeper understanding
+5. Keep reading the advacend parts of the foundation series: [Continue to 05_cognitive_tools.md →](05_cognitive_tools.md)
 
 The path you choose depends on your learning style and goals. Whatever direction you take, you now have the fundamental knowledge needed to become a skilled context engineer.
 
@@ -1398,41 +1000,3 @@ As context engineering evolves, several emerging trends are shaping the field:
 
 These developments promise even more powerful and flexible context engineering capabilities in the future.
 
----
-
-## Attribution
-
-**Content adapted from:** [Context-Engineering](https://github.com/davidkimai/Context-Engineering) by davidkimai
-
-**Licensed under:** MIT License
-
-**Original Source File:**
-- 00_foundations/04_organs_applications.md
-
-**Copyright:** © 2025 davidkimai
-
-**MIT License:**
-
-```
-MIT License
-
-Copyright (c) 2025 davidkimai
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
