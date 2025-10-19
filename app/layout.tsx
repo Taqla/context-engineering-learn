@@ -1,7 +1,8 @@
 'use client';
 
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, Layout } from 'antd';
 import { lobeHubTheme } from '@/styles/lobehub-theme';
+import DocsSidebar from '@/components/DocsSidebar';
 import '@/styles/globals.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -14,7 +15,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#1677ff" />
       </head>
       <body>
-        <ConfigProvider theme={lobeHubTheme}>{children}</ConfigProvider>
+        <ConfigProvider theme={lobeHubTheme}>
+          <Layout style={{ minHeight: '100vh' }}>
+            <Layout.Sider width={280} theme="light" style={{ position: 'fixed', height: '100vh', overflow: 'auto' }}>
+              <DocsSidebar />
+            </Layout.Sider>
+            <Layout style={{ marginLeft: 280 }}>
+              <Layout.Content style={{ padding: '24px 48px' }}>
+                <div className="mdx-content">{children}</div>
+              </Layout.Content>
+            </Layout>
+          </Layout>
+        </ConfigProvider>
       </body>
     </html>
   );
