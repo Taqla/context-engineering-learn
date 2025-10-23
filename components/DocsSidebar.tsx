@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { getAllProgress, resetAllProgress } from '@/lib/quiz-db';
 
 const learningPathItems = [
+  { key: 'intro', label: '🚀 Choose Learning Path', href: '/intro', duration: '2 min' },
   { key: 'module-1', label: 'Module 1: Prompt Fundamentals', href: '/module-1', duration: '30 min' },
   { key: 'module-2', label: 'Module 2: Context Expansion', href: '/module-2', duration: '45 min' },
   { key: 'module-3', label: 'Module 3: Multi-Agent Systems', href: '/module-3', duration: '60 min' },
