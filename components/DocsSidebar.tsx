@@ -1,7 +1,7 @@
 'use client';
 
-import { Menu, Collapse, Progress, Button, Space, Typography } from 'antd';
-import { BookOutlined, FolderOutlined, ReloadOutlined } from '@ant-design/icons';
+import { Menu, Collapse, Progress, Button, Space, Typography, Tag } from 'antd';
+import { BookOutlined, FolderOutlined, ReloadOutlined, ExperimentOutlined } from '@ant-design/icons';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -9,6 +9,26 @@ import { getAllProgress, resetAllProgress } from '@/lib/quiz-db';
 
 const learningPathItems = [
   { key: 'intro', label: '🚀 Choose Learning Path', href: '/intro', duration: '2 min' },
+  
+  // OPTIONAL: Math Foundations (collapsible)
+  {
+    key: 'module-0',
+    label: (
+      <span style={{ color: '#8c8c8c' }}>
+        📐 Module 0: Math Foundations{' '}
+        <Tag color="default" style={{ fontSize: 10 }}>Optional</Tag>
+      </span>
+    ),
+    icon: <ExperimentOutlined style={{ color: '#8c8c8c' }} />,
+    children: [
+      { key: 'module-0-lesson-1', label: 'Context Assembly Equation', href: '/module-0/lesson-1' },
+      { key: 'module-0-lesson-2', label: 'Token Optimization', href: '/module-0/lesson-2' },
+      { key: 'module-0-lesson-3', label: 'Component Interactions', href: '/module-0/lesson-3' },
+      { key: 'module-0-lesson-4', label: 'Recursive Memory', href: '/module-0/lesson-4' }
+    ]
+  },
+  
+  // PRIMARY PATH: Practical Track (Modules 1-6)
   { key: 'module-1', label: 'Module 1: Prompt Fundamentals', href: '/module-1', duration: '30 min' },
   { key: 'module-2', label: 'Module 2: Context Expansion', href: '/module-2', duration: '45 min' },
   { key: 'module-3', label: 'Module 3: Multi-Agent Systems', href: '/module-3', duration: '60 min' },
@@ -96,11 +116,26 @@ export default function DocsSidebar() {
         <Menu
           mode="inline"
           selectedKeys={[pathname.split('/')[1] || 'module-1']}
-          items={learningPathItems.map(item => ({
-            key: item.key,
-            icon: <BookOutlined />,
-            label: <Link href={item.href}>{item.label}</Link>,
-          }))}
+          items={learningPathItems.map(item => {
+            // Handle Module 0 with children (collapsible)
+            if (item.children) {
+              return {
+                key: item.key,
+                icon: item.icon,
+                label: item.label,
+                children: item.children.map(child => ({
+                  key: child.key,
+                  label: <Link href={child.href}>{child.label}</Link>,
+                })),
+              };
+            }
+            // Handle regular modules
+            return {
+              key: item.key,
+              icon: item.icon || <BookOutlined />,
+              label: item.href ? <Link href={item.href}>{item.label}</Link> : item.label,
+            };
+          })}
         />
 
         <Collapse
